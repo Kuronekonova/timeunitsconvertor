@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk, messagebox
-timeUnits, tus_seconds, spaceStrings = ["Second", "Minute", "Hour", "Day", "Week", "Month", "Year", "Decade", "Century"], [1, 60, 3600, 86400, 604800, 2419200, 29030400, 290304000, 2903040000], ["                                       ", "                                                                 "]
+timeUnits, tus_seconds, spaceStrings = ["Second(s)", "Minute(s)", "Hour(s)", "Day(s)", "Week(s)", "Month(s)", "Year(s)", "Decade(s)", "Century(s)"], [1, 60, 3600, 86400, 604800, 2419200, 29030400, 290304000, 2903040000], ["                                       ", "                                                                 "]
 def findElement_index(array, num):
     if(num not in array):
         elementIndex = None
@@ -44,12 +44,12 @@ rightSide_Entry = ttk.Entry(root, width=45)
 rightSide_Entry.bind("<Return>", lambda event: rightside_conversion(rightSide_Entry))
 rightSide_Entry.place(x=420, y=30, height=30)
 leftSide_option = StringVar()
-leftSide_option.set("Second")
+leftSide_option.set("Second(s)")
 leftSide_Menu = OptionMenu(root, leftSide_option, *timeUnits, command=lambda event: leftside_conversion(leftSide_Entry))
 leftSide_Menu.configure(width=39)
 leftSide_Menu.place(x=4, y=65)
 rightSide_option = StringVar()
-rightSide_option.set("Second")
+rightSide_option.set("Second(s)")
 rightSide_Menu = OptionMenu(root, rightSide_option, *timeUnits, command=lambda event: rightside_conversion(rightSide_Entry))
 rightSide_Menu.configure(width=39)
 rightSide_Menu.place(x=420, y=65)

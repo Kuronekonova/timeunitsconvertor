@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk, messagebox
+import os
 timeUnits, tus_seconds, spaceStrings = ["Second(s)", "Minute(s)", "Hour(s)", "Day(s)", "Week(s)", "Month(s)", "Year(s)", "Decade(s)", "Century(s)"], [1, 60, 3600, 86400, 604800, 2419200, 29030400, 290304000, 2903040000], ["                                       ", "                                                                 "]
 def findElement_index(array, num):
     if(num not in array):
@@ -13,18 +14,22 @@ def findElement_index(array, num):
             else:
                 continue
 def leftside_conversion(event): # Put the converted amount into the right side.
+    inputedAmount = leftSide_Entry.get()
+    inputedAmount = inputedAmount.replace(",", ".")
     try:
-        inputedAmount = float(leftSide_Entry.get())
+        inputedAmount = float(inputedAmount)
     except:
-        pass
+        rightSide_Entry.delete(0, END)
     conversionResult = (inputedAmount * tus_seconds[findElement_index(timeUnits, str(leftSide_option.get()))]) / tus_seconds[findElement_index(timeUnits, str(rightSide_option.get()))]
     rightSide_Entry.delete(0, END)
     rightSide_Entry.insert(0, str(conversionResult))
 def rightside_conversion(event): # Put the converted amount into the left side.
+    inputedAmount = rightSide_Entry.get()
+    inputedAmount = inputedAmount.replace(",", ".")
     try:
-        inputedAmount = float(rightSide_Entry.get())
+        inputedAmount = float(inputedAmount)
     except:
-        pass
+        leftSide_Entry.delete(0, END)
     conversionResult = (inputedAmount * tus_seconds[findElement_index(timeUnits, str(rightSide_option.get()))]) / tus_seconds[findElement_index(timeUnits, str(leftSide_option.get()))]
     leftSide_Entry.delete(0, END)
     leftSide_Entry.insert(0, str(conversionResult))
@@ -38,10 +43,10 @@ equal_sign.place(x=330, y=12)
 ttk.Label(root, text=spaceStrings[0] + "Select any unit you want, and input how much of that unit you want to convert on any side." + spaceStrings[1], background="gray").place(x=0)
 leftSide_Entry = ttk.Entry(root, width=45)
 leftSide_Entry.focus_force()
-leftSide_Entry.bind("<Return>", lambda event: leftside_conversion(leftSide_Entry))
+leftSide_Entry.bind("<KeyRelease>", lambda event: leftside_conversion(leftSide_Entry))
 leftSide_Entry.place(x=5, y=30, height=30)
 rightSide_Entry = ttk.Entry(root, width=45)
-rightSide_Entry.bind("<Return>", lambda event: rightside_conversion(rightSide_Entry))
+rightSide_Entry.bind("<KeyRelease>", lambda event: rightside_conversion(rightSide_Entry))
 rightSide_Entry.place(x=420, y=30, height=30)
 leftSide_option = StringVar()
 leftSide_option.set("Second(s)")
